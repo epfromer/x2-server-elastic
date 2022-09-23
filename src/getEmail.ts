@@ -10,7 +10,7 @@ import {
 } from './common'
 import { v4 as uuidv4 } from 'uuid'
 
-const createSearchParams = (httpQuery) => {
+const createSearchParams = (httpQuery: HTTPQuery) => {
   // console.log(httpQuery)
 
   const { id, allText, sent, from, to, subject, body } = httpQuery
@@ -60,7 +60,7 @@ const createSearchParams = (httpQuery) => {
   return query
 }
 
-const createSortOrder = (httpQuery) => {
+const createSortOrder = (httpQuery: HTTPQuery) => {
   // https://www.elastic.co/guide/en/elasticsearch/reference/current/fielddata.html
   let sort = ''
   if (httpQuery.sort) {
@@ -99,7 +99,7 @@ export async function getEmail(httpQuery: HTTPQuery): Promise<EmailTotal> {
       ignore_unavailable: true,
     })
 
-    const emails = body.hits.hits.map((email) => ({
+    const emails = body.hits.hits.map((email: any) => ({
       id: email._source.id,
       sent: email._source.sent,
       sentShort: new Date(email._source.sent).toISOString().slice(0, 10),

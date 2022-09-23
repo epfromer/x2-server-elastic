@@ -59,7 +59,7 @@ const getCustodians = async (): Promise<Array<Custodian>> => {
     q: '*',
     sort: 'id.keyword:asc',
   })
-  return body.hits.hits.map((custodian) => ({
+  return body.hits.hits.map((custodian: any) => ({
     id: custodian._source.id,
     name: custodian._source.name,
     title: custodian._source.title,
@@ -98,7 +98,7 @@ const setCustodianColor = async (
     q: '*',
     sort: 'id.keyword:asc',
   })
-  return body.hits.hits.map((custodian) => ({
+  return body.hits.hits.map((custodian: any) => ({
     id: custodian._source.id,
     name: custodian._source.name,
     title: custodian._source.title,
@@ -118,7 +118,7 @@ interface Root {
   getImportStatus: () => Array<ImportLogEntry>
   getSearchHistory: () => Promise<Array<SearchHistoryEntry>>
   getWordCloud: () => Promise<Array<WordCloudTag>>
-  importPST: (httpQuery) => string
+  importPST: (httpQuery: HTTPQuery) => string
   setCustodianColor: (httpQuery: HTTPQuery) => Promise<Array<Custodian>>
 }
 export const root: Root = {

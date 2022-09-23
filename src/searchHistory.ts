@@ -14,7 +14,7 @@ export async function getSearchHistory(): Promise<Array<SearchHistoryEntry>> {
     q: '*',
     sort: 'timestamp:desc',
   })
-  return body.hits.hits.map((entry) => ({
+  return body.hits.hits.map((entry: any) => ({
     id: entry._id,
     timestamp: entry._source.timestamp,
     entry: entry._source.entry,

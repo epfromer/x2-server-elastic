@@ -1,8 +1,8 @@
-import { graphqlSchema } from '@klonzo/common'
 import cors from 'cors'
 import * as dotenv from 'dotenv'
 import express, { Application } from 'express'
 import { graphqlHTTP } from 'express-graphql'
+import { graphqlSchema } from './common'
 import root from './root'
 dotenv.config()
 
