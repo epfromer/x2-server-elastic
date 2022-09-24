@@ -1,11 +1,11 @@
 export interface Email {
   id: string
   sent: Date
-  sentShort?: string
+  sentShort: string
   from: string
-  fromCustodian?: string
+  fromCustodian: string
   to: string
-  toCustodians?: string[]
+  toCustodians: string[]
   cc: string
   bcc: string
   subject: string
