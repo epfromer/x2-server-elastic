@@ -1,10 +1,11 @@
 import { Client } from '@elastic/elasticsearch'
+import { v4 as uuidv4 } from 'uuid'
 import {
   Custodian,
   custodianCollection,
   dbName,
-  emailCollection,
   Email,
+  emailCollection,
   EmailSentByDay,
   emailSentByDayCollection,
   getNumPSTs,
@@ -16,7 +17,6 @@ import {
   wordCloudCollection,
   WordCloudTag,
 } from './common'
-import { v4 as uuidv4 } from 'uuid'
 
 // https://www.elastic.co/blog/new-elasticsearch-javascript-client-released
 // https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/7.x/introduction.html
@@ -32,10 +32,6 @@ const processSend = (msg: string) => {
 }
 
 async function run() {
-  if (!process.env.ELASTIC_HOST) {
-    throw 'MONGODB_HOST undefined'
-  }
-
   if (!getNumPSTs(process.argv[2])) {
     processSend(`no PSTs found in ${process.argv[2]}`)
     return

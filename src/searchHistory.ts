@@ -2,10 +2,6 @@ import { dbName, searchHistoryCollection, SearchHistoryEntry } from './common'
 import { Client } from '@elastic/elasticsearch'
 
 export async function getSearchHistory(): Promise<Array<SearchHistoryEntry>> {
-  if (!process.env.ELASTIC_HOST || !process.env.ELASTIC_PORT) {
-    throw 'ELASTIC_HOST or ELASTIC_PORT undefined'
-  }
-
   const client = new Client({
     node: `http://${process.env.ELASTIC_HOST}:${process.env.ELASTIC_PORT}`,
   })
@@ -22,10 +18,6 @@ export async function getSearchHistory(): Promise<Array<SearchHistoryEntry>> {
 }
 
 export async function clearSearchHistory(): Promise<string> {
-  if (!process.env.ELASTIC_HOST || !process.env.ELASTIC_PORT) {
-    throw 'ELASTIC_HOST or ELASTIC_PORT undefined'
-  }
-
   const client = new Client({
     node: `http://${process.env.ELASTIC_HOST}:${process.env.ELASTIC_PORT}`,
   })

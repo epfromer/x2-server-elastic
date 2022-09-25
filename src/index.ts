@@ -11,6 +11,10 @@ dotenv.config()
 // http://localhost:9200/x2
 // http://localhost:9200/x2/_search?q=*
 
+if (!process.env.ELASTIC_HOST || !process.env.ELASTIC_PORT) {
+  throw 'ELASTIC_HOST or ELASTIC_PORT undefined'
+}
+
 const app = express()
 app.use(cors())
 app.use(

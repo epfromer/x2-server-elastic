@@ -17,10 +17,6 @@ import { getImportStatus, importPST } from './importPST'
 import { clearSearchHistory, getSearchHistory } from './searchHistory'
 
 const getWordCloud = async (): Promise<Array<WordCloudTag>> => {
-  if (!process.env.ELASTIC_HOST || !process.env.ELASTIC_PORT) {
-    throw 'ELASTIC_HOST or ELASTIC_PORT undefined'
-  }
-
   const client = new Client({
     node: `http://${process.env.ELASTIC_HOST}:${process.env.ELASTIC_PORT}`,
   })
@@ -32,10 +28,6 @@ const getWordCloud = async (): Promise<Array<WordCloudTag>> => {
 }
 
 const getEmailSentByDay = async (): Promise<Array<EmailSentByDay>> => {
-  if (!process.env.ELASTIC_HOST || !process.env.ELASTIC_PORT) {
-    throw 'ELASTIC_HOST or ELASTIC_PORT undefined'
-  }
-
   const client = new Client({
     node: `http://${process.env.ELASTIC_HOST}:${process.env.ELASTIC_PORT}`,
   })
@@ -74,10 +66,6 @@ const getCustodians = async (): Promise<Array<Custodian>> => {
 const setCustodianColor = async (
   httpQuery: HTTPQuery
 ): Promise<Array<Custodian>> => {
-  if (!process.env.ELASTIC_HOST || !process.env.ELASTIC_PORT) {
-    throw 'ELASTIC_HOST or ELASTIC_PORT undefined'
-  }
-
   throw 'not yet implemented'
 
   const client = new Client({
