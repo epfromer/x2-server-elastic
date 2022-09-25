@@ -39,10 +39,6 @@ const getEmailSentByDay = async (): Promise<Array<EmailSentByDay>> => {
 }
 
 const getCustodians = async (): Promise<Array<Custodian>> => {
-  if (!process.env.ELASTIC_HOST || !process.env.ELASTIC_PORT) {
-    throw 'ELASTIC_HOST or ELASTIC_PORT undefined'
-  }
-
   const client = new Client({
     node: `http://${process.env.ELASTIC_HOST}:${process.env.ELASTIC_PORT}`,
   })
