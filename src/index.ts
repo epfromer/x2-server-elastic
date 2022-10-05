@@ -11,10 +11,6 @@ dotenv.config()
 // http://localhost:9200/x2
 // http://localhost:9200/x2/_search?q=*
 
-if (!process.env.ELASTIC_HOST || !process.env.ELASTIC_PORT) {
-  throw 'ELASTIC_HOST or ELASTIC_PORT undefined'
-}
-
 const app = express()
 app.use(cors())
 app.use(
@@ -31,6 +27,11 @@ app.use(
     }),
   }) as Application
 )
+app.get('/', function (req, res) {
+  res.send(
+    'x2-server-elastic: GraphQL interface on email in ElasticSearch for X2 client'
+  )
+})
 
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`elastic running on PORT: ${port}`))

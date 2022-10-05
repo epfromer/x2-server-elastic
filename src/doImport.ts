@@ -8,6 +8,7 @@ import {
   emailCollection,
   EmailSentByDay,
   emailSentByDayCollection,
+  getEnv,
   getNumPSTs,
   processCustodians,
   processEmailSentByDay,
@@ -38,10 +39,10 @@ async function run() {
   }
 
   processSend(
-    `connect to http://${process.env.ELASTIC_HOST}:${process.env.ELASTIC_PORT}`
+    `connect to http://${getEnv('ELASTIC_HOST')}:${getEnv('ELASTIC_PORT')}`
   )
   const client = new Client({
-    node: `http://${process.env.ELASTIC_HOST}:${process.env.ELASTIC_PORT}`,
+    node: `http://${getEnv('ELASTIC_HOST')}:${getEnv('ELASTIC_PORT')}`,
   })
 
   const insertEmails = async (emails: Email[]): Promise<void> => {

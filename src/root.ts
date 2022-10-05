@@ -6,6 +6,7 @@ import {
   EmailSentByDay,
   emailSentByDayCollection,
   EmailTotal,
+  getEnv,
   HTTPQuery,
   ImportLogEntry,
   SearchHistoryEntry,
@@ -18,7 +19,7 @@ import { clearSearchHistory, getSearchHistory } from './searchHistory'
 
 const getWordCloud = async (): Promise<Array<WordCloudTag>> => {
   const client = new Client({
-    node: `http://${process.env.ELASTIC_HOST}:${process.env.ELASTIC_PORT}`,
+    node: `http://${getEnv('ELASTIC_HOST')}:${getEnv('ELASTIC_PORT')}`,
   })
   const { body } = await client.search({
     index: dbName + wordCloudCollection,
@@ -29,7 +30,7 @@ const getWordCloud = async (): Promise<Array<WordCloudTag>> => {
 
 const getEmailSentByDay = async (): Promise<Array<EmailSentByDay>> => {
   const client = new Client({
-    node: `http://${process.env.ELASTIC_HOST}:${process.env.ELASTIC_PORT}`,
+    node: `http://${getEnv('ELASTIC_HOST')}:${getEnv('ELASTIC_PORT')}`,
   })
   const { body } = await client.search({
     index: dbName + emailSentByDayCollection,
@@ -40,7 +41,7 @@ const getEmailSentByDay = async (): Promise<Array<EmailSentByDay>> => {
 
 const getCustodians = async (): Promise<Array<Custodian>> => {
   const client = new Client({
-    node: `http://${process.env.ELASTIC_HOST}:${process.env.ELASTIC_PORT}`,
+    node: `http://${getEnv('ELASTIC_HOST')}:${getEnv('ELASTIC_PORT')}`,
   })
   const { body } = await client.search({
     index: dbName + custodianCollection,
@@ -65,7 +66,7 @@ const setCustodianColor = async (
   throw 'not yet implemented'
 
   const client = new Client({
-    node: `http://${process.env.ELASTIC_HOST}:${process.env.ELASTIC_PORT}`,
+    node: `http://${getEnv('ELASTIC_HOST')}:${getEnv('ELASTIC_PORT')}`,
   })
   // await client.update({
   //   index: dbName + custodianCollection,

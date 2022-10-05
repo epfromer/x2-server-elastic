@@ -1,9 +1,14 @@
-import { dbName, searchHistoryCollection, SearchHistoryEntry } from './common'
+import {
+  dbName,
+  getEnv,
+  searchHistoryCollection,
+  SearchHistoryEntry,
+} from './common'
 import { Client } from '@elastic/elasticsearch'
 
 export async function getSearchHistory(): Promise<Array<SearchHistoryEntry>> {
   const client = new Client({
-    node: `http://${process.env.ELASTIC_HOST}:${process.env.ELASTIC_PORT}`,
+    node: `http://${getEnv('ELASTIC_HOST')}:${getEnv('ELASTIC_PORT')}`,
   })
   const { body } = await client.search({
     index: dbName + searchHistoryCollection,
@@ -19,7 +24,7 @@ export async function getSearchHistory(): Promise<Array<SearchHistoryEntry>> {
 
 export async function clearSearchHistory(): Promise<string> {
   const client = new Client({
-    node: `http://${process.env.ELASTIC_HOST}:${process.env.ELASTIC_PORT}`,
+    node: `http://${getEnv('ELASTIC_HOST')}:${getEnv('ELASTIC_PORT')}`,
   })
   await client.indices.delete({ index: dbName + searchHistoryCollection })
   await client.indices.create({ index: dbName + searchHistoryCollection })

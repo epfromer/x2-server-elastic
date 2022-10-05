@@ -4,6 +4,7 @@ import {
   defaultLimit,
   emailCollection,
   EmailTotal,
+  getEnv,
   HTTPQuery,
   searchHistoryCollection,
   startupQuery,
@@ -81,7 +82,7 @@ export async function getEmail(httpQuery: HTTPQuery): Promise<EmailTotal> {
   try {
     const start = Date.now()
     const client = new Client({
-      node: `http://${process.env.ELASTIC_HOST}:${process.env.ELASTIC_PORT}`,
+      node: `http://${getEnv('ELASTIC_HOST')}:${getEnv('ELASTIC_PORT')}`,
     })
     // http://localhost:9200/_search
     // https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/7.x/api-reference.html#_search
