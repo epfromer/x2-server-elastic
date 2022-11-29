@@ -4,12 +4,15 @@ import express, { Application } from 'express'
 import { graphqlHTTP } from 'express-graphql'
 import { graphqlSchema } from './common'
 import root from './root'
-dotenv.config()
 
 // https://www.elastic.co/blog/new-elasticsearch-javascript-client-released
 // https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/7.x/introduction.html
 // http://localhost:9200/x2
 // http://localhost:9200/x2/_search?q=*
+
+dotenv.config()
+const VERBOSE = process.env.VERBOSE === '1'
+console.log('VERBOSE', VERBOSE)
 
 const app = express()
 app.use(cors())
@@ -33,5 +36,5 @@ app.get('/', function (req, res) {
   )
 })
 
-const port = process.env.PORT || 3000
-app.listen(port, () => console.log(`elastic running on PORT: ${port}`))
+const port = process.env.PORT || 80
+app.listen(port, () => console.log(`elastic on port ${port}`))
